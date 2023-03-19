@@ -1,83 +1,69 @@
-Tararache Crina-Andreea, grupa 324CB
+Tararache Crina-Andreea, 324CB
 
 Task 1.1:
-In primul rand se merge o pozitie la stanga si se adauga a pentru a se marca inceputul cuvantului. Se merge pana la finalul cuvantului cu
-starea start1: prima data se gaseste null deci bitul se retine, se inlocuieste cu X, contorul se deplaseaza la stanga pana cand intalneste 
-iar null si il scriem acolo pe prima pozitie libera (asta face functia write). Se reapeleaza start1 si incepand cu a doua oara se gaseste X 
-in loc de null, procedandu-se la fel. In momentul in care in start1 se gaseste a inseamna ca toate elementele au fost mutate deci se inlocuieste
-si a cu X doar ca in momentul asta avem cu un X mai mult decat ar trebui si decat sa-l stergem pe a si sa deplasam toti X de dupa la stanga este 
-mult mai eficient sa scriem X peste a, sa mergem la final de cuvant si sa stergem ultimul X (lucru pe care il facem cu s2 si s3).
+Se merge o pozitie la stanga si se adauga a pentru a se marca inceputul cuvantului. Se merge pana la finalul cuvantului cu starea start1: prima data se gaseste null 
+deci bitul se retine, se inlocuieste cu X, contorul se deplaseaza la stanga pana cand intalneste iar null si il scrie pe prima pozitie libera (functia write). Se 
+reapeleaza start1 si incepand cu a doua oara se gaseste X in loc de null, procedandu-se la fel. In momentul in care in start1 se gaseste a inseamna ca toate elementele
+au fost mutate deci se inlocuieste si a cu X doar ca in momentul asta avem cu un X mai mult decat ar trebui si decat sa-l stergem pe a si sa deplasam toti X de dupa 
+la stanga este mult mai eficient sa scriem X peste a, sa mergem la final de cuvant si sa stergem ultimul X (lucru pe care il facem cu s2 si s3).
 
 Task 1.2:
-Se parcurge banda de la stanga la dreapta. Se numara cu ajutorul starilor count daca avem mai mult de 4 biti. In cazul aceasta cel mai mic numar 
-ar putea fi 8 care este mai mare decat 5 deci resetam contorul la inceputul benzii si stergem toate elementele pana ajungem al final; atunci
-scriem 1 pe banda si dam accept. Daca avem mai putin de 4 biti pe banda si anume: daca avem 1 sau 2 clar nu este numar mai mare decat 5, deci 
-stergem si scriem 0. Mai ramane doar cazul in care avem 3 biti: primul este obligatoriu 1, il verificam pe al doilea. Daca si al doilea este 1 atunci
-al treilea nu mai conteaza ce e ca deja avem 6 deci apelam delete1 care sterge si pune 1 la final. In cazul in care este 0, verificam si ultimul bit. 
-Daca este 1 atunci este egal cu 5 si apelam la fel delete1; daca este 0 apelam delete2. 
+Se parcurge banda de la stanga la dreapta. Se numara cu ajutorul starilor count daca avem mai mult de 4 biti. In cazul aceasta cel mai mic numar ar putea fi 8 care este
+mai mare decat 5 deci resetam contorul la inceputul benzii si stergem toate elementele pana ajungem la final; atunci scriem 1 pe banda si dam accept. Daca avem mai 
+putin de 4 biti pe banda si anume: daca avem 1 sau 2 sigur nu este numar mai mare decat 5, deci stergem si scriem 0. Mai ramane doar cazul in care avem 3 biti: primul 
+este obligatoriu 1, il verificam pe al doilea. Daca si al doilea este 1 atunci al treilea nu mai conteaza pentru ca deja avem 6 deci apelam delete1 care sterge si 
+pune 1 la final. In cazul in care este 0, verificam si ultimul bit. Daca este 1 atunci este egal cu 5 si apelam la fel delete1; daca este 0 apelam delete2. 
 
 Task 1.3:
-Se muta contorul la finalul cuvantului si incep sa se verifice bitii de la dreapta la stanga. Daca avem ultimii 2 biti 00 se transforma in 11 si
-se accepta. Daca ultimii doi biti sunt 11 primul din dreapta clar se transforma in 0 pentru ca adaugandu-se 3 se schimba paritatea, iar cel de-al 
-doilea este lasat asa doar ca se apeleaza s4 si in functie de ce se gaseste in continuare 0 e inlocuit de 1 si 1 de 0. Acelasi principiu si pentru
-bitii care se termina in 01 sau 10.
+Se muta contorul la finalul cuvantului si incep sa se verifice bitii de la dreapta la stanga. Daca avem ultimii 2 biti 00 se transforma in 11 si se accepta. Daca 
+ultimii doi biti sunt 11 primul din dreapta se transforma in 0 pentru ca adaugandu-se 3 se schimba paritatea, iar cel de-al doilea este lasat asa doar ca se apeleaza 
+s4 si in functie de ce se gaseste in continuare 0 e inlocuit de 1 si 1 de 0. Acelasi principiu si pentru bitii care se termina in 01 sau 10.
 
 Task 1.4:
-Pentru inceput parcurgem sirul dat pana la final si scriem caracterul S pe banda pentru a marca sfarsitul cuvantului. Apelam
-reset_by_X(delimitator) care duce contorul inapoi la inceputul sirului si oricare ar fi primul element il suprascrie cu M, se
-muta contorul la stanga si se scrie caracterul sters. Practic shiftarea se face inversand M cu fiecare element din dreapta sa pana
-cand se intalneste S, M actionand ca un delimitator intre grupurile de biti ce trebuie prelucrati si cei ramasi. Asa cum am spus, inainte
-de verificarea bitilor din stanga lui M mergem o pozitie in dreapta si verificam daca acel caracter este diferit de S. Daca da, ne deplasam
-inapoi in stanga si incepem verificarea de la cel mai din stanga element (de asta se asigura functia begin). Odata setat contorul la primul
-element, se trece in starea verify si dupa count. Practic numaram cati biti avem: daca avem un bit sau doi, ultimul fiind urmat de M, 
-atunci clar trebuie sa mai adaugam un element dincolo de delimitator (starea shift_by_M), daca insa avem 3 sau 4 biti, ultimul fiind urmat
-de M, trebuie verificat daca numarul format este mai mare decat 5 deci se apeleaza reset_by_X(compare) care reseteaza contorul 
-la cel mai din stanga element al gruparii respective (pentru ca grupurile de delimitate ori de spatiu, ori de X, ori de M); starea primeste ca 
-parametru starea compare pentru ca dupa ce a resetat contorul incepe sa verifice daca este mai mare sau egal cu 5. Daca este, se adauga 3.
-Chiar daca este, chiar nu este, starea urmatoare este check: se verifica daca nu cumva mai exista grupuri delimitate de X sau M care sa fie 
-verificate si prelucrate. Daca se gaseste un X sau un M pana la finalul cuvantului, inseamna ca mai este un grup care n-a fost verificat si
-atunci se reseaza iar contorul la inceputul grupului. Daca se ajunge la S fara sa se gaseasca niciun delimitator se apeleaza iar shift_by_M,
-adaugandu-se astfel un nou bit. De asemenea, se verifica daca nu cumva avem 5 elemente intr-un grup, caz in care cel mai stanga element se
-shifteaza la stanga fiind delimitat de un X de restul elementelor creandu-se astfel o noua grupare. In mare altgoritmul functioneaza cam asa:
-se inverseaza bit cu bit fata de M (delimitatorul principal), in momentul in care s-au facut 5 elemente, se shifteaza la stanga ultimul fiind 
-delimitat de X, se verifica toate grupurile de la cel mai din stanga pana la final, adica: daca se merge la dreapta si se intalneste X sau M
-(M delimitand ultima grupare) clar exista un grup de 4 elemente care n-a fost inca comparat cu 5. Se verifica, se ajunge iar la final, se 
-adauga iar un nou element. Asa sunt parcurse elementele pana in momentul in care in dreapta lui M se gaseste S ceea ce inseamna ca s-a ajuns la 
-final si atunci nu mai trebuie parcursi si modificati bitii. In momentul asta se sterge S, se sterge si M si incep sa se numere bitii. Avand in 
-vedere ca abia ce a fost shiftat ultimul element avem gruparea cea mai din dreapta de 5 biti, deci tot shiftam pana ajungem la ultimul element 
-din stanga. In momentul asta avem output-ul care trebuie doar ca delimitat de X si fara padding. Asadar in continuare cu ajutorul c1,c2,c3,c4 
-shiftam la stanga si cand ajungem la cel mai stanga grup verificam cati biti avem inainte de X pentru a sti cati 0 punem inaintea primului 1
-(asta facem cu put1, put2, put3). In momentul care in c5 s-a gasit spatiu, adica s-a facut padding si s-a ajuns la primul spatiu din stanga parcurgem
-iar cuvantul si marcam cu S sfarsit pentru a putea sterge X-urile. Se apeleaza reset2 care duce contorul de la final la inceputul cuvantului si se
-apeleaza delete_X: cand se gaseste un X se sterge si se muta fiecare element reapelandu-se shift_right; cand s-a intalnit S contorul iar s-a mutat
-la inceputul cuvantului si se repeta procedura. Cand nu se mai gaseste niciun  X in starea delete_x si se gaseste S inseamna ca au fost stersi
-toti X si il putem sterge si pe S si accepta.
-
-MENTIUNE: Avand in vedere ca pentru inputul 5 algoritmul meu are 4388 de pasi si se intrerupea rularea cand se atingeau cei 4096 pasi maximi prevazuti 
-in checker, l-am modificat ca sa obtin punctajul si intr-adevar algoritmul meu ajunge la rezultatul corect. 
+Pentru inceput parcurgem sirul dat pana la final si scriem caracterul S pe banda pentru a marca sfarsitul cuvantului. Apelam reset_by_X(delimitator) care duce contorul
+inapoi la inceputul sirului si oricare ar fi primul element il suprascrie cu M, se muta contorul la stanga si se scrie caracterul sters. Practic shiftarea se face 
+inversand M cu fiecare element din dreapta sa pana cand se intalneste S, M actionand ca un delimitator intre grupurile de biti ce trebuie prelucrati si cei ramasi. Asa
+cum am spus, inainte de verificarea bitilor din stanga lui M mergem o pozitie in dreapta si verificam daca acel caracter este diferit de S. Daca da, ne deplasam inapoi
+in stanga si incepem verificarea de la cel mai din stanga element (de asta se asigura functia begin). Odata setat contorul la primul element, se trece in starea verify
+si dupa count. Practic numaram cati biti avem: daca avem un bit sau doi, ultimul fiind urmat de M, atunci trebuie sa mai adaugam un element dincolo de delimitator 
+(starea shift_by_M), daca insa avem 3 sau 4 biti, ultimul fiind urmat de M, trebuie verificat daca numarul format este mai mare decat 5 deci se apeleaza 
+reset_by_X(compare) care reseteaza contorul la cel mai din stanga element al gruparii respective (pentru ca grupurile de delimitate ori de spatiu, ori de X, ori de M);
+starea primeste ca parametru starea compare pentru ca dupa ce a resetat contorul incepe sa verifice daca este mai mare sau egal cu 5. Daca este, se adauga 3. Chiar 
+daca este, chiar nu este, starea urmatoare este check: se verifica daca nu cumva mai exista grupuri delimitate de X sau M care sa fie verificate si prelucrate. Daca se
+gaseste un X sau un M pana la finalul cuvantului, inseamna ca mai este un grup care n-a fost verificat si atunci se reseaza iar contorul la inceputul grupului. Daca se
+ajunge la S fara sa se gaseasca niciun delimitator se apeleaza iar shift_by_M, adaugandu-se astfel un nou bit. De asemenea, se verifica daca nu cumva avem 5 elemente 
+intr-un grup, caz in care cel mai stanga element se shifteaza la stanga fiind delimitat de un X de restul elementelor creandu-se astfel o noua grupare. In mare 
+altgoritmul functioneaza cam asa: se inverseaza bit cu bit fata de M (delimitatorul principal), in momentul in care s-au facut 5 elemente, se shifteaza la stanga 
+ultimul fiind delimitat de X, se verifica toate grupurile de la cel mai din stanga pana la final: daca se merge la dreapta si se intalneste X sau M (M delimitand 
+ultima grupare) sigur exista un grup de 4 elemente care n-a fost inca comparat cu 5. Se verifica, se ajunge iar la final, se adauga iar un nou element. Asa sunt
+parcurse elementele pana in momentul in care in dreapta lui M se gaseste S ceea ce inseamna ca s-a ajuns la final si atunci nu mai trebuie parcursi si modificati bitii.
+In momentul asta se sterge S, se sterge si M si incep sa se numere bitii. Avand in vedere ca abia ce a fost shiftat ultimul element avem gruparea cea mai din dreapta
+de 5 biti, deci tot shiftam pana ajungem la ultimul element din stanga. In momentul asta avem output-ul care trebuie doar ca delimitat de X si fara padding. Asadar in 
+continuare cu ajutorul c1,c2,c3,c4 shiftam la stanga si cand ajungem la cel mai stanga grup verificam cati biti avem inainte de X pentru a sti cati 0 punem inaintea 
+primului 1 (asta facem cu put1, put2, put3). In momentul care in c5 s-a gasit spatiu, adica s-a facut padding si s-a ajuns la primul spatiu din stanga parcurgem iar 
+cuvantul si marcam cu S sfarsit pentru a putea sterge X-urile. Se apeleaza reset2 care duce contorul de la final la inceputul cuvantului si se apeleaza delete_X: cand 
+se gaseste un X se sterge si se muta fiecare element reapelandu-se shift_right; cand s-a intalnit S contorul iar s-a mutat la inceputul cuvantului si se repeta 
+procedura. Cand nu se mai gaseste niciun X in starea delete_x si se gaseste S inseamna ca au fost stersi toti X si il putem sterge si pe S si accepta. 
 
 Task 2.1:
-Similar cu 1.1
+Similar cu Task 1.1
 
 Task 2.2:
-Se muta contorul la finalul cuvantului si se parcurge de la dreapta la stanga. Similar cu 1.3: daca ultimii 2 biti sunt 1 se transforma in 0 si se trece
-in starea delete care sterge toate zerourile gasite inaintea primului 1 din stanga si da accept. Daca ultimul bit e 0 si el se transforma in 1 pentru ca 
-se schimba paritatea. In continuare daca si urmatorul e 0 se lasa asa si se trece la urmatorul bit din stanga si in momentul in care s-a gasit l-am transformat
-in 0 si am apelat delete. Daca gasim 1 si dupa 0 (de la dreapta la stanga ii parcurgem) pe 1 il transformam in 0, pe 0 in 1 si dupa aceea doar cand mai gasim 1
-mai schimbam. De altfel, daca avem 0 si 1, 0 se transforma in 1 (ultimul bit mereu se neaga), 1 se lasa asa si apoi se face din 0 in 1 pana cand se gaseste un 1
-care se face 0 si se da delete. Odata sterse zerourile se da accept.
+Se muta contorul la finalul cuvantului si se parcurge de la dreapta la stanga. Similar cu Task 1.3: daca ultimii 2 biti sunt 1 se transforma in 0 si se trece in starea
+delete care sterge toate zerourile gasite inaintea primului 1 din stanga si da accept. Daca ultimul bit e 0 si el se transforma in 1 pentru ca se schimba paritatea. In
+continuare daca si urmatorul e 0 se lasa asa si se trece la urmatorul bit din stanga si in momentul in care s-a gasit l-am transformat in 0 si am apelat delete. Daca 
+gasim 1 si dupa 0 (de la dreapta la stanga ii parcurgem) pe 1 il transformam in 0, pe 0 in 1 si dupa aceea doar cand mai gasim 1 mai schimbam. De altfel, daca avem 0 
+si 1, 0 se transforma in 1 (ultimul bit mereu se neaga), 1 se lasa asa si apoi se face din 0 in 1 pana cand se gaseste un 1 care se face 0 si se da delete. Odata 
+sterse zerourile se da accept.
 
 Task 2.3:
-Pentru a transforma inputul dat din BCD in binary am urmat urmatoarea logica. Parcurg sirul dat pana la ultimul caracter
-(0 sau 1) si oricare ar fi el pun X in loc, ma deplasez o pozitie la dreapta si il adaug acolo; practic shiftarea se face 
-inversand de fiecare data X cu caracterul din stanga sa. Odata mutat X-ul ne deplasam o pozitie la stanga si incepem sa numaram
-grupuri de 4 caractere (count1, count2, count3, count4). Daca gasim 4 simboluri, verificam daca primul bit din stanga e 1
-(pentru ca se compara cu numarul 8 in zecimal); daca nu gasim 4, apelam reset(writeX): inseamna ca ori s-au comparat toate 
-grupurile de 4 caractere, ori nu mai exista, si in cazul asta ducem contorul la primul simbol din stanga lui X, inversam si
-o luam de la capat. Daca gasim grup de 4 caractere si primul bit e 0 trecem mai departe fara sa facem vreo modificare si
-verificam in continuare daca mai exista grupuri de 4 biti la stanga. Daca primul bit este 1 incepem procesul de scadere cu 3
-si mutam cursorul la ultimul element din grupul de 4 (adica primul din dreapta) si verificam bit cu bit de la dreapta la stanga.
-Odata ce s-a efectuat scaderea se verifica daca mai sunt simboluri in stanga. Daca mai sunt se apeleaza count1 pentru a vedea daca 
-mai gasim un grup de 4, daca se intalneste spatiu resetam contorul si reluam procesul. Altgoritmul se opreste cand in stanga lui X
-nu se mai citeste 1 sau 0, ci spatiu, ceea ce inseamna ca in dreapta lui X avem output-ul dorit. Stergem X-ul si de asemenea
-stergem toate zerourile de la inceput. In momentul in care s-a gasit primul 1, se intra in starea accept.
+Pentru a transforma inputul dat din BCD in binary am urmat urmatoarea logica. Parcurg sirul dat pana la ultimul caracter (0 sau 1) si oricare ar fi el pun X in loc, ma
+deplasez o pozitie la dreapta si il adaug acolo; practic shiftarea se face inversand de fiecare data X cu caracterul din stanga sa. Odata mutat X-ul ne deplasam o 
+pozitie la stanga si incepem sa numaram grupuri de 4 caractere (count1, count2, count3, count4). Daca gasim 4 simboluri, verificam daca primul bit din stanga e 1 
+(pentru ca se compara cu numarul 8 in zecimal); daca nu gasim 4, apelam reset(writeX): inseamna ca ori s-au comparat toate grupurile de 4 caractere, ori nu mai exista,
+si in cazul acesta ducem contorul la primul simbol din stanga lui X, inversam si o luam de la capat. Daca gasim grup de 4 caractere si primul bit e 0 trecem mai 
+departe fara sa facem vreo modificare si verificam in continuare daca mai exista grupuri de 4 biti la stanga. Daca primul bit este 1 incepem procesul de scadere cu 3
+si mutam cursorul la ultimul element din grupul de 4 (adica primul din dreapta) si verificam bit cu bit de la dreapta la stanga. Odata ce s-a efectuat scaderea se 
+verifica daca mai sunt simboluri in stanga. Daca mai sunt se apeleaza count1 pentru a vedea daca mai gasim un grup de 4, daca se intalneste spatiu resetam contorul si
+reluam procesul. Altgoritmul se opreste cand in stanga lui X nu se mai citeste 1 sau 0, ci spatiu, ceea ce inseamna ca in dreapta lui X avem output-ul dorit. Stergem 
+X-ul si de asemenea stergem toate zerourile de la inceput. In momentul in care s-a gasit primul 1, se intra in starea accept.
